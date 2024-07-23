@@ -137,7 +137,10 @@
 				case "=":
 					btn_equ_clk();
 					break;
-				case " ":
+				case "z":
+				case "Z":
+				case "я":
+				case "Я":
 					btn_znak_clk();
 					break;
 			}
@@ -146,6 +149,7 @@
 	<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+	  <div>
 		<table id="tbl_main">
 				<tr>
 					<td><button id="btn_c" onclick="btn_c_clk()">C</button></td>
@@ -173,14 +177,14 @@
 					<td><button onclick="btn_num_clk(1)">1</button></td>
 					<td colspan=2><button onclick="btn_num_clk(2)">2</button></td>
 					<td><button onclick="btn_num_clk(3)">3</button></td>
-					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('/')">/</button></td>
+					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('/')">&divide;</button></td>
 				</tr>
 				<tr>
 					<td><button onclick="btn_num_clk(0)">0</button></td>
 					<td class="half_btn"><button onclick="btn_point_clk()">.</button></td>
-					<td class="half_btn"><button onclick="btn_znak_clk()">+/-</button></td>
+					<td class="half_btn"><button onclick="btn_znak_clk()">&plusmn;</button></td>
 					<td><button id="btn_equ" onclick="btn_equ_clk()">=</button></td>
-					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('*')">*</button></td>
+					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('*')">&times;</button></td>
 				</tr>
 		</table>
 	</body>
