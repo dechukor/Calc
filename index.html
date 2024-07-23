@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Калькулятор</title>
+	<script>
+		var point = 0; /*Переменная наличия разделительной точки*/
+		var oper = "none"; /*Переменная арифметического действия*/
+		var num_a = 0; /*Переменная для первого числа*/
+		var num_b = 0; /*Переменная для второго числа*/
+		var rez = 0; /*Переменная результата*/
+		var rez_flag = false; /*Флаг получения результата*/
+				
+		/*Обработка нажатия цифровых кнопок*/
+		function btn_num_clk(num) {
+			let s = document.getElementById("inp_field").value.length;  /*Количество символов в строке ввода для ограничения ввода больших чисел*/			
+			if (rez_flag == false && s < 14) {
+				if (document.getElementById("inp_field").value == "0") {
+					document.getElementById("inp_field").value = num;
+				} else {
+					document.getElementById("inp_field").value = document.getElementById("inp_field").value + num;
+				}
+			}
+		}
+		/*Обработка кнопки сброса*/
+		function btn_c_clk() {
+			document.getElementById("inp_field").value = "0";
+			document.getElementById("div_inp_1").innerHTML = "";
+			point = 0;
+			oper = "none";
+			num_a = 0;
+			num_b = 0;
+			rez = 0;
+			rez_flag = false;
+		}
+		/*Обработка нажатия кнопки "точка"*/
+		function btn_point_clk() {
+			if (point == 0) {
+				if (document.getElementById("inp_field").value == "0") {
+					document.getElementById("inp_field").value = "0.";
+				} else {
+					document.getElementById("inp_field").value = document.getElementById("inp_field").value + ".";
+				}
+				point = 1;
+			}			
+		}
+		/*Обработка нажатия кнопки изменения знака числа*/
+		function btn_znak_clk() {
+			if(isNaN(document.getElementById("inp_field").value)){
+			/*Если в поле ввода не число, то ничего не выполняем*/
+			} else {
+				document.getElementById("inp_field").value = document.getElementById("inp_field").value * -1;
+			}
+		}
+		/*Обработка нажатия кнопок арифметических операций*/
+		function btn_oper_clk(op) {
+			if (oper == "none") {
+				oper = op;
+				num_a = Number(document.getElementById("inp_field").value);
+				if (num_a < 0) { 	/*Если число a отрицательное, вывести его в скобках*/
+					document.getElementById("div_inp_1").innerHTML = "(" + num_a + ")" + " " + oper + "&nbsp;";
+				} else {
+					document.getElementById("div_inp_1").innerHTML = num_a + " " + oper + "&nbsp;";
+				}
+				document.getElementById("inp_field").value = 0;
+				point = 0;
+				rez_flag = false;
+			}			
+		}
+		/*Обработка нажатия кнопки "равно"*/
+		function btn_equ_clk() {
+			if (oper != "none" && rez_flag == false) {
+				num_b = Number(document.getElementById("inp_field").value);
+				if (num_b < 0) {		/*Если число b отрицательное, вывести его в скобках*/
+					document.getElementById("div_inp_1").innerHTML = document.getElementById("div_inp_1").innerHTML + "(" + num_b + ") =" + "&nbsp;"; 
+				} else {
+					document.getElementById("div_inp_1").innerHTML = document.getElementById("div_inp_1").innerHTML + num_b + " =" + "&nbsp;";
+				}	
+				switch (oper) {
+					case "+":
+						rez = Number(num_a) + Number(num_b);												
+						break;
+					case "-":
+						rez = num_a - num_b;
+						break;
+					case "/":
+						rez = num_a / num_b;
+						break;
+					case "*":
+						rez = num_a * num_b;
+						break;
+				}
+				/*Проверка деления на ноль*/
+				if (oper == "/" && num_b == 0){
+					document.getElementById("inp_field").value = "На ноль делить нельзя!";
+				} else { 
+					rez = Number.parseFloat(rez).toFixed(10);
+					document.getElementById("inp_field").value = Number(rez);
+					oper = "none";
+					rez = 0;					
+				}
+				rez_flag = true;
+				point = 1;				
+			}			
+		}
+		
+		document.onkeypress = function(e) {
+			let k = e.key;
+			switch (k) {
+				case "1":
+				case "2":
+				case "3":
+				case "4":
+				case "5":
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+				case "0":
+					btn_num_clk(k);
+					break;	
+				case "*":
+				case "/":
+				case "-":
+				case "+":
+					btn_oper_clk(k);
+					break;
+				case ".":
+				case ",":
+					btn_point_clk();
+					break;
+				case "c": /*Латиница*/
+				case "C":
+				case "с": /*Кириллица*/
+				case "С":
+					btn_c_clk();
+					break;
+				case "=":
+					btn_equ_clk();
+					break;
+				case " ":
+					btn_znak_clk();
+					break;
+			}
+		}
+	</script>
+	<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+	  <div>
+		<table id="tbl_main">
+				<tr>
+					<td><button id="btn_c" onclick="btn_c_clk()">C</button></td>
+					<td colspan=4>
+					<div id="div_inp_main">			
+						<div id="div_inp_1"></div>
+						<div id="div_inp_2"><input type=text id="inp_field" value="0" readonly></div>
+					</div>				
+					</td>
+					
+				</tr>
+				<tr>
+					<td><button onclick="btn_num_clk(7)">7</button></td>
+					<td colspan=2><button onclick="btn_num_clk(8)">8</button></td>
+					<td><button onclick="btn_num_clk(9)">9</button></td>
+					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('+')">+</button></td>
+				</tr>
+				<tr>
+					<td><button onclick="btn_num_clk(4)">4</button></td>
+					<td colspan=2><button onclick="btn_num_clk(5)">5</button></td>
+					<td><button onclick="btn_num_clk(6)">6</button></td>
+					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('-')">-</button></td>
+				</tr>
+				<tr>
+					<td><button onclick="btn_num_clk(1)">1</button></td>
+					<td colspan=2><button onclick="btn_num_clk(2)">2</button></td>
+					<td><button onclick="btn_num_clk(3)">3</button></td>
+					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('/')">/</button></td>
+				</tr>
+				<tr>
+					<td><button onclick="btn_num_clk(0)">0</button></td>
+					<td class="half_btn"><button onclick="btn_point_clk()">.</button></td>
+					<td class="half_btn"><button onclick="btn_znak_clk()">+/-</button></td>
+					<td><button id="btn_equ" onclick="btn_equ_clk()">=</button></td>
+					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('*')">*</button></td>
+				</tr>
+		</table>
+	</body>
+</html>
