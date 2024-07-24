@@ -152,8 +152,7 @@
 	  <div>
 		<table id="tbl_main">
 				<tr>
-					<td><button id="btn_c" onclick="btn_c_clk()">C</button></td>
-					<td colspan=4>
+					<td colspan=6>
 					<div id="div_inp_main">			
 						<div id="div_inp_1"></div>
 						<div id="div_inp_2"><input type=text id="inp_field" value="0" readonly></div>
@@ -162,28 +161,29 @@
 					
 				</tr>
 				<tr>
-					<td><button onclick="btn_num_clk(7)">7</button></td>
-					<td colspan=2><button onclick="btn_num_clk(8)">8</button></td>
-					<td><button onclick="btn_num_clk(9)">9</button></td>
+					<td colspan=2><button onclick="btn_num_clk(7)">7</button></td>
+					<td><button onclick="btn_num_clk(8)">8</button></td>
+					<td colspan=2><button onclick="btn_num_clk(9)">9</button></td>
 					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('+')">+</button></td>
 				</tr>
 				<tr>
-					<td><button onclick="btn_num_clk(4)">4</button></td>
-					<td colspan=2><button onclick="btn_num_clk(5)">5</button></td>
-					<td><button onclick="btn_num_clk(6)">6</button></td>
+					<td colspan=2><button onclick="btn_num_clk(4)">4</button></td>
+					<td><button onclick="btn_num_clk(5)">5</button></td>
+					<td colspan=2><button onclick="btn_num_clk(6)">6</button></td>
 					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('-')">-</button></td>
 				</tr>
 				<tr>
-					<td><button onclick="btn_num_clk(1)">1</button></td>
-					<td colspan=2><button onclick="btn_num_clk(2)">2</button></td>
-					<td><button onclick="btn_num_clk(3)">3</button></td>
+					<td colspan=2><button onclick="btn_num_clk(1)">1</button></td>
+					<td><button onclick="btn_num_clk(2)">2</button></td>
+					<td colspan=2><button onclick="btn_num_clk(3)">3</button></td>
 					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('/')">&divide;</button></td>
 				</tr>
-				<tr>
-					<td><button onclick="btn_num_clk(0)">0</button></td>
+				<tr>					
+					<td class="half_btn"><button id="btn_c" onclick="btn_c_clk()">C</button></td>
 					<td class="half_btn"><button onclick="btn_point_clk()">.</button></td>
+					<td><button onclick="btn_num_clk(0)">0</button></td>
 					<td class="half_btn"><button onclick="btn_znak_clk()">&plusmn;</button></td>
-					<td><button id="btn_equ" onclick="btn_equ_clk()">=</button></td>
+					<td class="half_btn"><button id="btn_equ" onclick="btn_equ_clk()">=</button></td>
 					<td class="half_btn"><button class="btn_oper" onclick="btn_oper_clk('*')">&times;</button></td>
 				</tr>
 		</table>
